@@ -16,12 +16,12 @@ adds point (x, y, z) to points and increment points.lastcol
 if points is full, should call grow on points
 ====================*/
 void add_point( struct matrix * points, double x, double y, double z) {
-	if(points -> lastcol == points -> cols - 1)
+	if(points -> lastcol >= points -> cols - 1)
 		grow_matrix(points, points -> cols + 1);
-	points[0][points -> lastcol] = x;
-	points[1][points -> lastcol] = y;
-	points[2][points -> lastcol] = z;
-	points[3][points -> lastcol] = 1;
+	points -> m[0][points -> lastcol] = x;
+	points -> m[1][points -> lastcol] = y;
+	points -> m[2][points -> lastcol] = z;
+	points -> m[3][points -> lastcol] = 1;
 	points -> lastcol++;
 }
 
@@ -49,13 +49,11 @@ to the screen
 ====================*/
 void draw_lines( struct matrix * points, screen s, color c) {
 	int i;
-	for(i = 0; i < points -> cols; i += 2)
-		draw_line()
+	for(i = 0; i < points -> cols; i += 2){
+	  draw_line((int)points -> m[i][0], (int)points -> m[i+1][0], (int)points -> m[i][1], (int)points -> m[i+1][1], s, c);
+	  printf("drawing line from (%d, %d) to (%d, %d)\n", (int)points -> m[i][0], (int)points -> m[i+1][0], (int)points -> m[i][1], (int)points -> m[i+1][1]);
+	}
 }
-
-
-
-
 
 void draw_line(int x0, int y0, int x1, int y1, screen s, color c) {
 
