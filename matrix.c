@@ -14,11 +14,10 @@ print the matrix
 void print_matrix(struct matrix *m) {
 	int i, j;
 	for(i = 0; i < m->rows; i++){
-	  for(j = 0; j < m->cols; j++)
-	    printf("%07.2lf ", m->m[i][j]);
-	  printf("\n");
-	}	
-	printf("\n");
+		for(j = 0; j < m->cols; j++)
+		printf("%06.2lf ", m->m[i][j]);
+		printf("\n");
+	}
 }
 
 /*-------------- void ident() --------------
@@ -54,7 +53,11 @@ void matrix_mult(struct matrix *a, struct matrix *b) {
 			}
 		}
 	}
-	b = ans;
+	for(i = 0; i < ans -> rows; i++){
+		for(j = 0; j < ans -> cols; j++){
+			b -> m[i][j] = ans -> m[i][j];
+		}
+	}
 	free_matrix(ans);
 }
 
